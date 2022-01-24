@@ -33,11 +33,8 @@ Em suma, a inteligência artificial usa o processamento de linguagem natural par
 Além do NLP, alguns outros conceitos estão incluídos no processamento da Inteligência Artificial, entre eles machine learning e deep learning NLP.
 
 * Entregáveis:  
->   
 1. Data Pipeline para automatizar as etapas de ETL.  
-> 
 2. Modelo de classificação que dado um determinado conjunto de teste o modelo consiga retornar a classificação em positivo, negativo ou neutro.  
-> 
 3. Relatório com os insights gerados a partir dos dados.  
 
 
@@ -54,7 +51,7 @@ import pandas as pd
 df_original = pd.read_csv("review.csv") # csv com os dados de review dos usuários
 df_original.head()
 ```
-![image](../../NLP/analise/pd1.png)
+![image](../../NLP/pd1.png)
 
 
 ```
@@ -110,7 +107,7 @@ plt.show()
 ```
 
     
-![image](../../NLP/analise/2.png)
+![image](../../NLP/2.png)
     
 
 
@@ -134,7 +131,7 @@ plt.show()
 
 
     
-![image](../../NLP/analise/3.png)
+![image](../../NLP/3.png)
     
 
 
@@ -150,7 +147,7 @@ plt.show()
 
 
     
-![image](../../NLP/analise/4.png)
+![image](../../NLP/4.png)
     
 
 
@@ -169,7 +166,7 @@ plt.show()
 
 
     
-![image](../../NLP/analise/5.png)
+![image](../../NLP/5.png)
     
 
 
@@ -183,7 +180,7 @@ df_copy.dropna(inplace = True)
 df_copy.head(10)
 ```
 
-![image](../../NLP/analise/6.png)
+![image](../../NLP/6.png)
 
 
 ```
@@ -261,7 +258,7 @@ df_copy.drop("review_comment_title", axis=1,inplace=True)
 df_copy.head()
 ```
 
-![image](../../NLP/analise/7.png)
+![image](../../NLP/7.png)
 
 
 ```
@@ -288,7 +285,7 @@ df_copy.review_score.value_counts()
 import plotly.express as px
 px.pie(df_copy,names='review_score',title='Distribution of Review Score',hole=0.5)
 ```
-![image](../../NLP/analise/8.png)
+![image](../../NLP/8.png)
 
 #### Podemos também analisar o conteúdo de cada review em relação ao score (em ordem ascendente)
 1 - Péssimo  
@@ -406,7 +403,7 @@ df_copy.head(20)
 ```
 
 
-![image](../../NLP/analise/9.png)
+![image](../../NLP/9.png)
 
 
 #### **Preparação dos dados**
@@ -593,7 +590,7 @@ tokenizer = RegexpTokenizer(r'\w+')
 df_copy['texto'] = df_copy['texto'].map(tokenizer.tokenize)
 df_copy['texto'].head(10)
 ```
-![image](../../NLP/analise/10.png)
+![image](../../NLP/10.png)
 
 
 ```
@@ -618,7 +615,7 @@ df_copy['texto'] = df_copy['texto'].apply(lambda x: combine_txt(x))
 df_copy.head(10)
 ```
 
-![image](../../NLP/analise/11.png)
+![image](../../NLP/11.png)
 
 
 ### **CountVectorizer (Matriz Esparsa)**  
