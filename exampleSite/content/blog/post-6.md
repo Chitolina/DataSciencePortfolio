@@ -51,7 +51,7 @@ import pandas as pd
 df_original = pd.read_csv("review.csv") # csv com os dados de review dos usuários
 df_original.head()
 ```
-![image](../../NLP/pd1.png)
+![image](../../images/NLP/pd1.png)
 
 
 ```
@@ -107,9 +107,8 @@ plt.show()
 ```
 
     
-![image](../../NLP/2.png)
+![image](../../images/NLP/2.png)
     
-
 
 #### **i- Importando algumas bibliotecas de plotagem**
 
@@ -131,9 +130,8 @@ plt.show()
 
 
     
-![image](../../NLP/3.png)
+![image](../../images/NLP/3.png)
     
-
 
 
 ```
@@ -147,7 +145,7 @@ plt.show()
 
 
     
-![image](../../NLP/4.png)
+![image](../../images/NLP/4.png)
     
 
 
@@ -166,7 +164,7 @@ plt.show()
 
 
     
-![image](../../NLP/5.png)
+![image](../../images/NLP/5.png)
     
 
 
@@ -180,7 +178,7 @@ df_copy.dropna(inplace = True)
 df_copy.head(10)
 ```
 
-![image](../../NLP/6.png)
+![image](../../images/NLP/6.png)
 
 
 ```
@@ -258,7 +256,7 @@ df_copy.drop("review_comment_title", axis=1,inplace=True)
 df_copy.head()
 ```
 
-![image](../../NLP/7.png)
+![image](../../images/NLP/7.png)
 
 
 ```
@@ -285,7 +283,7 @@ df_copy.review_score.value_counts()
 import plotly.express as px
 px.pie(df_copy,names='review_score',title='Distribution of Review Score',hole=0.5)
 ```
-![image](../../NLP/8.png)
+![image](../../images/NLP/8.png)
 
 #### Podemos também analisar o conteúdo de cada review em relação ao score (em ordem ascendente)
 1 - Péssimo  
@@ -403,7 +401,7 @@ df_copy.head(20)
 ```
 
 
-![image](../../NLP/9.png)
+![image](../../images/NLP/9.png)
 
 
 #### **Preparação dos dados**
@@ -590,7 +588,7 @@ tokenizer = RegexpTokenizer(r'\w+')
 df_copy['texto'] = df_copy['texto'].map(tokenizer.tokenize)
 df_copy['texto'].head(10)
 ```
-![image](../../NLP/10.png)
+![image](../../images/NLP/10.png)
 
 
 ```
@@ -615,7 +613,7 @@ df_copy['texto'] = df_copy['texto'].apply(lambda x: combine_txt(x))
 df_copy.head(10)
 ```
 
-![image](../../NLP/11.png)
+![image](../../images/NLP/11.png)
 
 
 ### **CountVectorizer (Matriz Esparsa)**  
