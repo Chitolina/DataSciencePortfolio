@@ -411,7 +411,6 @@ df_copy.head(20)
 ### **Stopwords**  
 
 * Remove palavras desnecessárias que não carregam nenhum significado. Tais palavras, dentro de uma abordagem de NLP, são irrelevantes e sua remoção colaboram com a analise textual; 
-> 
 * Alguns exemplos de stopwords comuns no português são preposições (em, na, no, etc), artigos (a, o,os, etc), conjunções (e, mas, etc), entre outras. 
 
 
@@ -422,10 +421,10 @@ def RemoveStopWords(instancia):
     return (" ".join(palavras))
 ```
 
-### **Stemming**  
+### **Stemming**  ⚠
 
 * Serve para diminuirmos a palavra até a sua raiz/base, pois assim, conseguimos tratar as palavras originais e suas respectivas derivações de uma mesma maneira;
->  
+
 * Exemplo: As palavras Correr e Corrida quando submetidas à nossa função de Stemming, ambas as palavras serão diminuídas até a base Corr. 
 
 
@@ -440,7 +439,7 @@ def Stemming(instancia):
 
 ### **Limpeza**  
 * É possível fazer uma limpeza nas strings que possam "sujar" a frase e atrapalhar a análise;
-> 
+
 * Remove strings.
 
 
@@ -451,14 +450,16 @@ def Limpeza_dados(instancia):
     return (instancia)
 ```
 
-#### **Lemmatization**  
+#### **Lemmatization** ⚠
+
+*Talvez seja mais apropriado se utilizarmos apenas Lemma ou Stemming, visto que os dois juntos podem "matar" nossas palavras.*
 
 Lematização é o processo de agrupar as diferentes formas flexionadas de uma palavra para que possam ser analisadas como um único item.
 
 Exemplos de lematização:
 
 1. jogar, jogo e jogador todas essas 3 palavras serão convertidas para jogo após a lematização;
-> 
+
 
 2. alterar, alternância e alterado todas essas palavras serão convertidas para alteração após a lematização.
 
