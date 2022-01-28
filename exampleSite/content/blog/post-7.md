@@ -22,9 +22,7 @@ tags:
 type: "featured"
 
 ---
-## **Previsão de Vendas** 💸 📉  
-### **Objetivo**  
-* Produzir um modelo de previsão baseado nas vendas dos produtos da base de dados (Olist) com o objetivo de prever o comportamento ao longo do tempo.  
+* O Objetivo é produzir um modelo de previsão baseado nas vendas dos produtos da base de dados (Olist) com o objetivo de prever o comportamento ao longo do tempo.  
 
 ### Importando algumas bibliotecas:  
 
