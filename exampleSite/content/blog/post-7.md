@@ -28,7 +28,7 @@ type: "featured"
 
 ### Importando algumas bibliotecas:  
 
-```python
+```
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -52,7 +52,7 @@ warnings.filterwarnings('ignore')
 ```
 
 
-```python
+```
 df = pd.read_csv("full_data_cleaned.csv")
 print("Printando algumas colunas")
 df_c = print(df.iloc[:, 2:7])
@@ -91,7 +91,7 @@ df_c = print(df.iloc[:, 2:7])
     
 
 
-```python
+```
 df.info()
 ```
 
@@ -144,7 +144,7 @@ df.info()
     
 
 
-```python
+```
 #Selecting just the useful features for this analysis
 
 data = df[['order_id','customer_id','order_purchase_timestamp','order_approved_at','order_status','order_delivered_carrier_date','order_delivered_customer_date',
@@ -154,7 +154,7 @@ data = df[['order_id','customer_id','order_purchase_timestamp','order_approved_a
 ```
 
 
-```python
+```
 # De-normalized data - All datasets together, OLAP.
 print('columns:', data.columns)
 print('shape:', data.shape)
@@ -181,7 +181,7 @@ Agora que temos todos os dados em um conjunto, vamos para a etapa de análise ex
 * Podemos fazer algumas análises na variável de interesse "price", para começar a entender melhor os dados relacionados à tarefa proposta.
 
 
-```python
+```
 priceGrouped = data.groupby('order_id')['price'].sum()
 priceGrouped.describe()
 ```
@@ -202,7 +202,7 @@ priceGrouped.describe()
 
 
 
-```python
+```
 # Vamos verificar a diferença de valor gerado por cada estado
 
 totalByState = data.groupby('customer_state')['price'].sum().sort_values(ascending=False)
@@ -227,7 +227,7 @@ sns.barplot(x=totalByState.index, y=totalByState)
 
 
 
-```python
+```
 # Preço e Pedidos seguem a mesma tendência em relação aos estados com maior atuação no consumo
 
 totalOrdersByState = data.groupby('customer_state')['order_id'].nunique().sort_values(ascending=False)
@@ -254,7 +254,7 @@ sns.barplot(x=totalOrdersByState.index, y=totalOrdersByState)
 Abaixo, também veremos quais estados recebem os vendedores com o maior número de vendas. Também vamos analisar quais estados possuem os maiores valores de frete, tendo em vista a grande extensão territorial do país.
 
 
-```python
+```
 totalSellerByState = data.groupby('seller_state')['order_id'].nunique().sort_values(ascending=False)
 totalSellerByState
 
@@ -277,7 +277,7 @@ plt.show()
 
 
 
-```python
+```
 freightAvgState = (data.groupby('customer_state')['freight_value'].sum() /data.groupby('customer_state')['order_id'].nunique()).sort_values(ascending=False)
 
 
@@ -302,7 +302,7 @@ sns.barplot(x=freightAvgState.index, y=freightAvgState)
 Categorias de produtos e avaliações. Aqui vamos verificar quais são os produtos com mais compras.
 
 
-```python
+```
 productCategoryOrders = data['product_category_name'].value_counts().head(10)
 
 plt.figure(figsize=(15,8))
@@ -328,7 +328,7 @@ Apesar de fazermos algumas análises que nos mostram alguns insights, o que a ta
 * Transformando nossos dados temporais em datetime, pois estavam como strings:
 
 
-```python
+```
 data['order_approved_at'] = pd.to_datetime(data['order_approved_at'])
 data['order_purchase_timestamp'] = pd.to_datetime(data['order_purchase_timestamp'])
 data['order_delivered_carrier_date'] = pd.to_datetime(data['order_delivered_carrier_date'])
@@ -357,7 +357,7 @@ print(data['order_approved_at'])
 Previsão de série temporal (soma dos números de vendas) para prever a soma do valor de vendas para as próximas semanas.  
 
 
-```python
+```
 data['price'] = data['price'].apply(int) # round instead of int is you prefer to round
 print(data['price'].head(15).to_markdown())
 ```
@@ -382,7 +382,7 @@ print(data['price'].head(15).to_markdown())
     
 
 
-```python
+```
 all_dates = data['order_purchase_timestamp'].dt.date.sort_values().reset_index(drop=True)
 
 miss_data = pd.date_range(start=all_dates.iloc[0], end=all_dates.iloc[-1]).difference(all_dates)
@@ -417,7 +417,7 @@ print(miss_data)
     
 
 
-```python
+```
 # Descartando os dados anteriores à 2017-01-04
 print(f'Último dado faltante {miss_data[-1]}')
 data= data[data['order_purchase_timestamp'] >= miss_data[-1]]
@@ -427,7 +427,7 @@ data= data[data['order_purchase_timestamp'] >= miss_data[-1]]
     
 
 
-```python
+```
 data.groupby([data['order_purchase_timestamp'].dt.date])['order_status'].count().plot(figsize=(20, 6), color="teal")
 plt.title('Total do número de vendas ao longo do tempo diário')
 plt.ylabel('Número de Vendas')
@@ -441,7 +441,7 @@ plt.xlabel('Data');
 
 
 
-```python
+```
 max_value = str(data.groupby([data['order_purchase_timestamp'].dt.date])['order_status'].count().idxmax())
 print(f'Pico de vendas no dia {max_value}. Black Friday?')
 ```
@@ -450,7 +450,7 @@ print(f'Pico de vendas no dia {max_value}. Black Friday?')
     
 
 
-```python
+```
 #So the date column has to be converted into the index
 
 data.round()
@@ -480,7 +480,7 @@ print(dataTimeMean.tail(10).to_markdown())
 Às vezes, precisamos avançar ou retroceder com uma certa quantidade de etapas de tempo, isso é chamado de mudança de tempo. O método shift() ajuda a fazer isso. Leva o "período" como argumento, que é o número (nº) de períodos com os quais queremos mudar. Portanto, se mencionarmos o período como 1, os valores das linhas serão deslocados um para baixo.
 
 
-```python
+```
 dataTimeMean['x1'] = dataTimeMean.price.shift(1)
 
 dataTimeMean.dropna(axis=0, inplace=True)
@@ -516,7 +516,7 @@ O modelo ARIMA (AutoRegressive Integrated Moving Average) é um modelo para não
 No contexto de regressão, a estacionaridade é importante, pois os mesmos resultados que se aplicam a dados independentes são válidos se os dados forem estacionários.
 
 
-```python
+```
 # diff(periods=1, axis=0)
 # Primeira diferença discreta de elemento:
 # calcula a diferença de um elemento Dataframe comparado com outro elemento no Dataframe (o padrão é elemento na linha anterior).
@@ -540,7 +540,7 @@ dataTimeMean.price.diff(1).plot(figsize=(20, 6), color="teal")
 
 
 
-```python
+```
 dataTimeMean.price.diff(1).groupby(dataTimeMean.index.month).mean().plot(kind='bar', figsize=(10, 6))
 ```
 
@@ -563,7 +563,7 @@ Vamos investigar o fator de autocorrelação para entender melhor quais parâmet
 * Percebemos então uma forte tendência de queda nos valores de acordo com a sazonalidade, ao final de cada ano.
 
 
-```python
+```
 from statsmodels.graphics.tsaplots import plot_acf, plot_pacf
 
 plot_acf(dataTimeMean.price)
@@ -577,7 +577,7 @@ plt.show()
 
 
 
-```python
+```
 plot_pacf(dataTimeMean.price, lags=10)
 plt.show()
 ```
@@ -605,7 +605,7 @@ A regressão linear é provavelmente uma das técnicas de regressão mais import
 Uma de suas principais vantagens é a facilidade de interpretação dos resultados.
 
 
-```python
+```
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import cross_val_score
@@ -633,7 +633,7 @@ Os conjuntos são construídos a partir de modelos de árvore de decisão. As á
 Os modelos são ajustados usando uma função de perda diferenciável arbitrária e algoritmo de otimização de gradiente descendente. Isso dá à técnica seu nome, “aumento de gradiente”, pois o gradiente de perda é minimizado à medida que o modelo é ajustado, muito parecido com uma rede neural.
 
 
-```python
+```
 from xgboost import XGBRegressor
 
 xgb = XGBRegressor(n_estimators=150, learning_rate=0.05)
@@ -657,7 +657,7 @@ print('RMSE for xgb was: \n', mean_squared_error(y, predictions_XGBoost, squared
 Florestas aleatórias ou florestas de decisão aleatória são um método de aprendizado de conjunto para classificação, regressão e outras tarefas que operam construindo uma infinidade de árvores de decisão no tempo de treinamento. Para tarefas de classificação, a saída da floresta aleatória é a classe selecionada pela maioria das árvores. Para tarefas de regressão, a previsão média ou média das árvores individuais é retornada. As florestas de decisão aleatória corrigem o hábito das árvores de decisão de se sobreajustar ao seu conjunto de treinamento. As florestas aleatórias geralmente superam as árvores de decisão, mas sua precisão é menor do que as árvores impulsionadas por gradiente.
 
 
-```python
+```
 from sklearn.ensemble import RandomForestRegressor
 randomF = RandomForestRegressor(n_estimators = 500, random_state=0).fit(X, y)
 
@@ -688,7 +688,7 @@ A diferença das métricas pode auxiliar no diagnóstico de predições muito ru
 ### **Então, vamos escolher XGB Regressor.**
 
 
-```python
+```
 dataTimeMean['Pred_XGB'] = predictions_XGBoost
 dataTimeMean['price'].plot(figsize=(15, 6), color="teal")
 dataTimeMean['Pred_XGB'].plot(color="orange")
@@ -704,7 +704,7 @@ plt.grid(color = 'gray', linestyle = '--', linewidth = 0.4)
 
 
 
-```python
+```
 print(dataTimeMean.tail(10).to_markdown())
 ```
 
@@ -725,7 +725,7 @@ print(dataTimeMean.tail(10).to_markdown())
 Comparando com o RF
 
 
-```python
+```
 dataTimeMean['Pred_RF'] = predictions_RandomForest
 
 dataTimeMean['price'].plot(figsize=(15, 6), color="teal")
@@ -742,7 +742,7 @@ plt.grid(color = 'gray', linestyle = '--', linewidth = 0.4)
 
 
 
-```python
+```
 print(dataTimeMean.tail(10).to_markdown())
 ```
 
@@ -761,7 +761,7 @@ print(dataTimeMean.tail(10).to_markdown())
     
 
 
-```python
+```
 dataTimeMean = dataTimeMean.drop(columns=['Pred_RF'], axis=0)
 dataTimeMean['Pred_XGB']  = dataTimeMean['Pred_XGB'].apply(int)
 print(dataTimeMean.tail(10).to_markdown())
@@ -784,7 +784,7 @@ print(dataTimeMean.tail(10).to_markdown())
 Dividindo os dados de "montante de $" entre teste e treino
 
 
-```python
+```
 train_size = int(len(dataTimeMean.price) * 2 / 3)
 
 train = X[:train_size]
@@ -813,7 +813,7 @@ plt.legend(['train', 'test'])
 Apliocando xgb no teste. Let's see how the model XGB Regressor fits on unseen data (test set)
 
 
-```python
+```
 plt.figure(figsize=(15, 6),linewidth=8)
 plt.plot(dataTimeMean.price, color='teal')
 
@@ -833,7 +833,7 @@ plt.grid(color = 'gray', linestyle = '--', linewidth = 0.4)
 Predizendo o montante por semana
 
 
-```python
+```
 lastPrice = dataTimeMean['price'][-1]
 
 datesToPredict = pd.Series(dataTimeMean.index[-1] + pd.Timedelta('1 w'))
@@ -850,7 +850,7 @@ print("Next week's predicted price is: R$", xgb.predict(forecastData))
 Forecasting is a technique that uses historical data as inputs to make informed estimates that are predictive in determining the direction of future trends. 
 
 
-```python
+```
 plt.figure(figsize=(20, 6))
 plt.plot(dataTimeMean.price,color='teal')
 forecast = xgb.predict(test)
@@ -867,7 +867,7 @@ plt.grid(color = 'gray', linestyle = '--', linewidth = 0.4)
 
 
 
-```python
+```
 #Delete data generated from XGB
 
 dataTimeMean = dataTimeMean.drop(columns=['Pred_XGB', 'x1'], axis=0)
@@ -900,7 +900,7 @@ print(dataTimeMean.tail(20).to_markdown())
     
 
 
-```python
+```
 train = dataTimeMean[:train_size]
 test = dataTimeMean[train_size-1:]
 
@@ -923,7 +923,7 @@ plt.plot(test, color="chocolate")
 
 
 
-```python
+```
 autoArimaModel = auto_arima(train, m=12, seazonal=False, 
                             trace=False, random_state=1, n_fits=50)
 
@@ -961,7 +961,7 @@ print(autoArimaModel.summary())
     
 
 
-```python
+```
 dateRange = pd.date_range(dataTimeMean.index[-1], freq='W', periods=13)[1:]
 
 predict = pd.DataFrame(autoArimaModel.predict(n_periods=len(dateRange)), index=dateRange)
@@ -993,7 +993,7 @@ print((predict.price).to_markdown())
     
 
 
-```python
+```
 plt.figure(figsize=(15,5))
 plt.ticklabel_format(useOffset=False, style='plain')
 plt.plot(train, label = 'Train')
@@ -1016,6 +1016,6 @@ Analisando cada uma das variáveis ​​conseguimos obter insights importantes 
 * Poderíamos prever a receita para as próximas semanas, ou meses, apoiando a equipe que definirá as metas.
 
 
-```python
+```
 
 ```
