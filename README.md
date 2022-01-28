@@ -2,7 +2,7 @@
 
 This is my second, and now main, site/portfolio, created through Hugo framework and using Liva theme by "ThemeFisher".  
 If this kind of project got your interest, I teach you how to prepare your own Site on this repo: https://github.com/Chitolina/CreatingYourSiteGuide  
-I hope you enjoy ;)  
+I hope you enjoy it ;)  
 
 
 ![Screenshot](screenshot.png)
