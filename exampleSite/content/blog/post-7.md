@@ -1,5 +1,5 @@
 ---
-title: "Olist Price Prediction"
+title: "Previsão de Vendas - Olist"
 date: 2022-01-28
 draft: false
 
