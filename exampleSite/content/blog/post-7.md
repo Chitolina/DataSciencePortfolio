@@ -1,6 +1,6 @@
 ---
 title: "Olist Price Prediction"
-date: 2021-11-19T16:50:18-03:00
+date: 2022-01-28
 draft: false
 
 # post thumb
