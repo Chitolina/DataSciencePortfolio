@@ -145,7 +145,7 @@ df.info()
 
 
 ```
-#Selecting just the useful features for this analysis
+#Selecionando "apenas" algumas features
 
 data = df[['order_id','customer_id','order_purchase_timestamp','order_approved_at','order_status','order_delivered_carrier_date','order_delivered_customer_date',
         'order_estimated_delivery_date','order_item_id','product_id','price','freight_value','shipping_limit_date',
@@ -175,7 +175,7 @@ print('shape:', data.shape)
     
 
 #### EDA - Análise Exploratória de Dados  
-> 
+
 Agora que temos todos os dados em um conjunto, vamos para a etapa de análise exploratória para entender melhor o que está em nossas mãos.
 
 * Podemos fazer algumas análises na variável de interesse "price", para começar a entender melhor os dados relacionados à tarefa proposta.
@@ -213,19 +213,9 @@ plt.title('Preço Total por Estado')
 sns.barplot(x=totalByState.index, y=totalByState)
 ```
 
-
-
-
-    <AxesSubplot:title={'center':'Preço Total por Estado'}, xlabel='customer_state', ylabel='price'>
-
-
-
-
     
 ![image](../../images/Predicao/output_8_1.png)
     
-
-
 
 ```
 # Preço e Pedidos seguem a mesma tendência em relação aos estados com maior atuação no consumo
@@ -237,14 +227,6 @@ plt.figure(figsize=(15,5))
 plt.title('Ordem total de produtos por Estado')
 sns.barplot(x=totalOrdersByState.index, y=totalOrdersByState)
 ```
-
-
-
-
-    <AxesSubplot:title={'center':'Ordem total de produtos por Estado'}, xlabel='customer_state', ylabel='order_id'>
-
-
-
 
     
 ![image](../../images/Predicao/output_9_1.png)
@@ -287,13 +269,6 @@ sns.barplot(x=freightAvgState.index, y=freightAvgState)
 ```
 
 
-
-
-    <AxesSubplot:title={'center':'Valor médio do frete em R$ por Estado do Cliente'}, xlabel='customer_state'>
-
-
-
-
     
 ![image](../../images/Predicao/output_12_1.png)
     
@@ -310,18 +285,9 @@ plt.title('As 10 principais categorias de produtos com mais pedidos')
 sns.barplot(y=productCategoryOrders.index, x=productCategoryOrders, orient='h')
 ```
 
-
-
-
-    <AxesSubplot:title={'center':'As 10 principais categorias de produtos com mais pedidos'}, xlabel='product_category_name'>
-
-
-
-
     
 ![image](../../images/Predicao/output_14_1.png)
     
-
 
 Apesar de fazermos algumas análises que nos mostram alguns insights, o que a tarefa nos pede é uma relação de valores por uma medida de tempo. Portanto, precisamos afunilar os dados que iremos usar pra alcançar o objetivo principal.
 
@@ -451,7 +417,7 @@ print(f'Pico de vendas no dia {max_value}. Black Friday?')
 
 
 ```
-#So the date column has to be converted into the index
+#A coluna de data precisa ser convertida para o índice
 
 data.round()
 dataTime = data[['order_id', 'order_purchase_timestamp', 'price']].set_index('order_purchase_timestamp', inplace=False)
@@ -527,17 +493,9 @@ dataTimeMean.price.diff(1).plot(figsize=(20, 6), color="teal")
 ```
 
 
-
-
-    <AxesSubplot:xlabel='order_purchase_timestamp'>
-
-
-
-
     
 ![image](../../images/Predicao/output_28_1.png)
     
-
 
 
 ```
@@ -545,20 +503,12 @@ dataTimeMean.price.diff(1).groupby(dataTimeMean.index.month).mean().plot(kind='b
 ```
 
 
-
-
-    <AxesSubplot:xlabel='order_purchase_timestamp'>
-
-
-
-
     
 ![image](../../images/Predicao/output_29_1.png)
     
 
-
 Decompondo os dados, notamos uma forte tendência de queda nos valores de acordo com a sazonalidade, ao final de cada ano, em dezembro, provavelmente após uma alta provocada pela Black Friday.  
-> 
+
 Vamos investigar o fator de autocorrelação para entender melhor quais parâmetros devemos utilizar: 
 * Percebemos então uma forte tendência de queda nos valores de acordo com a sazonalidade, ao final de cada ano.
 
@@ -594,7 +544,7 @@ Então, vamos criar uma nova variável para aplicar um modelo de regressão para
 #### **Podemos testar alguns modelos de Regressão**
 
 Quando você precisa de regressão?  
-> 
+
 Normalmente, você precisa de regressão para responder se e/ou como um fenômeno influencia outro, ou como várias variáveis ​​estão relacionadas.   Por exemplo, você pode usá-lo para determinar se e até que ponto a experiência ou o gênero impactam os salários.
 
 A regressão também é útil quando você deseja prever uma resposta usando um novo conjunto de preditores. Por exemplo, você pode tentar prever o consumo de eletricidade de uma casa para a próxima hora, considerando a temperatura externa, a hora do dia e o número de moradores dessa casa.
@@ -627,9 +577,9 @@ print('RMSE for Linear Regression was: \n', mean_squared_error(y, predictionsLin
 
 Os problemas de modelagem preditiva de regressão envolvem a previsão de um valor numérico, como uma quantia em dólar ou uma altura. 
 O XGBoost pode ser usado diretamente para modelagem preditiva de regressão. 
-> 
+
 Os conjuntos são construídos a partir de modelos de árvore de decisão. As árvores são adicionadas uma de cada vez ao conjunto e ajustadas para corrigir os erros de previsão feitos pelos modelos anteriores. Este é um tipo de modelo de aprendizado de máquina de conjunto conhecido como boosting.  
->  
+ 
 Os modelos são ajustados usando uma função de perda diferenciável arbitrária e algoritmo de otimização de gradiente descendente. Isso dá à técnica seu nome, “aumento de gradiente”, pois o gradiente de perda é minimizado à medida que o modelo é ajustado, muito parecido com uma rede neural.
 
 
@@ -703,7 +653,6 @@ plt.grid(color = 'gray', linestyle = '--', linewidth = 0.4)
     
 
 
-
 ```
 print(dataTimeMean.tail(10).to_markdown())
 ```
@@ -739,7 +688,6 @@ plt.grid(color = 'gray', linestyle = '--', linewidth = 0.4)
     
 ![image](../../images/Predicao/output_46_0.png)
     
-
 
 
 ```
@@ -798,19 +746,11 @@ plt.legend(['train', 'test'])
 ```
 
 
-
-
-    <matplotlib.legend.Legend at 0x25c98a83070>
-
-
-
-
     
 ![image](../../images/Predicao/output_50_1.png)
     
 
-
-Apliocando xgb no teste. Let's see how the model XGB Regressor fits on unseen data (test set)
+Aplicando xgb no teste: veremos como o modelo XGB vai "fitar" em dado ao qual n teve contato (teste)
 
 
 ```
@@ -1014,8 +954,3 @@ plt.show()
 Analisando cada uma das variáveis ​​conseguimos obter insights importantes sobre os clientes do site Olist:  
 * Conseguimos prever a receita de vendas para as próximas semanas;
 * Poderíamos prever a receita para as próximas semanas, ou meses, apoiando a equipe que definirá as metas.
-
-
-```
-
-```
