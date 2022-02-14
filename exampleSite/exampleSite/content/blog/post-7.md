@@ -785,6 +785,9 @@ print("Next week's predicted price is: R$", xgb.predict(forecastData))
     Next week's predicted price is: R$ [116449.96]
     
 
+Forecasting is a technique that uses historical data as inputs to make informed estimates that are predictive in determining the direction of future trends. 
+
+
 ```
 plt.figure(figsize=(20, 6))
 plt.plot(dataTimeMean.price,color='teal')
@@ -799,6 +802,7 @@ plt.grid(color = 'gray', linestyle = '--', linewidth = 0.4)
     
 ![image](../../images/Predicao/output_56_0.png)
     
+
 
 
 ```

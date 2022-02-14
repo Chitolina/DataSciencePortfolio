@@ -1418,7 +1418,7 @@ plt.show()
     
 ---
 
-### Now the best one: according to the site, which are the top 10 movies?
+### Now the best one: accordint to the site, what are the top 10 movies?
 
 
 ```
