@@ -1,10 +1,10 @@
 ---
-title: "Previsão de Vendas - Olist"
-date: 2022-01-28
+title: "Análise exploratória (EDA) e Manipulação de dados: Dino dataset"
+date: 2022-02-14
 draft: false
 
 # post thumb
-image: "images/featured-post/dino.jpg"
+image: "images/featured-post/dino.png"
 
 # meta description
 description: "this is meta description"
