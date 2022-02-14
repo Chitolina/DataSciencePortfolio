@@ -4,7 +4,7 @@ date: 2022-01-28
 draft: false
 
 # post thumb
-image: "images/featured-post/price.jpg"
+image: "images/featured-post/dino.jpg"
 
 # meta description
 description: "this is meta description"
@@ -12,11 +12,9 @@ description: "this is meta description"
 # taxonomies
 categories:
 - Exploratory Analysis
-- Machine Learning
+- Data Mining
 tags:
   - "Exploratory Analysis"
-  - "Business"
-  - "Price Prediction"
 
 # post type
 type: "featured"
@@ -25,16 +23,16 @@ type: "featured"
 
 <h1 align=center><a target="_blank" href="https://demo.gethugothemes.com/liva" rel="nofollow">Análise exploratória (EDA) e Manipulação de dados: Dino dataset</a> <a  target="_blank" href="https://lighthouse-dot-webdotdevsite.appspot.com//lh/html?url=https%3A%2F%2Fdemo.gethugothemes.com%2Fliva%2F">🦕</a></h1>
 
-#### **Análise exploratória (EDA) e Manipulação de dados com o intuito de gerar insights a respeito de um pequeno dataset sobre dinossauros (maioria de variáveis categóricas).**
-##### O dataset foi obtido a partir de um processo de webscraping do site do Museu de História Nacional (https://www.nhm.ac.uk/discover/dino-directory.html), realizado por outro usuário (https://github.com/kjanjua26/jurassic-park), ao qual eu descobri aleatoriamente. Assim, curioso e obcecado por dinossauros, resolvi unir o útil ao agradável e aprimorar meu conhecimento em EDA com um assunto que me agrada. Como é um dataset pequeno e majoritariamente constituído de variáveis qualitativas, trabalhei apenas na geração de insights, sem aplicar nenhum modelo preditivo.
+###### **Análise exploratória (EDA) e Manipulação de dados com o intuito de gerar insights a respeito de um pequeno dataset sobre dinossauros (maioria de variáveis categóricas).**
+###### O dataset foi obtido a partir de um processo de webscraping do site do Museu de História Nacional (https://www.nhm.ac.uk/discover/dino-directory.html), realizado por outro usuário (https://github.com/kjanjua26/jurassic-park), ao qual eu descobri aleatoriamente. Assim, curioso e obcecado por dinossauros, resolvi unir o útil ao agradável e aprimorar meu conhecimento em EDA com um assunto que me agrada. Como é um dataset pequeno e majoritariamente constituído de variáveis qualitativas, trabalhei apenas na geração de insights, sem aplicar nenhum modelo preditivo.
 
-##### O pequeno projeto aprimorou minhas skills na manipulação de dados e ampliou minha capacidade de gerar análises visualmente interessantes. O interessante da análise com Python é que, diferente de outras ferramentas, como Excel/Bi/Tableau, você tem uma maior versatilidade na hora de manipular/separar/excluir dados, além do potencial de análises preditivas, o que faz com que o conhecimento da linguagem torne-se muito positivo para quem gosta de trabalhar analisando dados.
+###### O pequeno projeto aprimorou minhas skills na manipulação de dados e ampliou minha capacidade de gerar análises visualmente interessantes. O interessante da análise com Python é que, diferente de outras ferramentas, como Excel/Bi/Tableau, você tem uma maior versatilidade na hora de manipular/separar/excluir dados, além do potencial de análises preditivas, o que faz com que o conhecimento da linguagem torne-se muito positivo para quem gosta de trabalhar analisando dados.
 
 <center><img style="-webkit-user-select: none;margin: auto;cursor: zoom-in;background-color: hsl(0, 0%, 90%);transition: background-color 300ms;" src="https://naturalsciences.org/calendar/wp-content/uploads/2020/11/DD-Press-Release-Art-Copyright-FriendsNCMNS_1920x960-1.jpg" width="1200" height="600" ></center>
 
 É de praxe começar importando bibliotecas de frequente uso.
 
-```python
+```
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -46,7 +44,7 @@ warnings.filterwarnings('ignore')
 ```
 
 
-```python
+```
 df = pd.read_csv("data.csv")
 df.head(5)
 ```
@@ -55,7 +53,7 @@ df.head(5)
 Verificamos algumas informações sobre a tabela.
 
 
-```python
+```
 df.columns
 ```
 
@@ -69,7 +67,7 @@ df.columns
 
 
 
-```python
+```
 df.info()
 ```
 
@@ -96,7 +94,7 @@ Podemos verificar o tamanho e algumas informações de nosso dataset.
 Constitui-se majoritariamente de dados qualitativos, porém temos uma coluna chamada comprimento (length), o que pode indicar ser uma variável quantitativa (numérica).
 
 
-```python
+```
 nRow, nCol = df.shape
 print(f'Temos {nRow} linhas e  {nCol} colunas')
 print('\n')
@@ -127,7 +125,7 @@ print(df.info())
     
 
 
-```python
+```
 df.isna().sum() #alguns dados faltantes, é sempre bom procurar uma maneira de tratá-los logo que possível, embora eu não tenha feito isso nesse momento.
 ```
 
@@ -151,7 +149,7 @@ df.isna().sum() #alguns dados faltantes, é sempre bom procurar uma maneira de t
 É possível isolar uma variável de interesse e aplicar alguma função em cima dela, como no caso value_counts, para visualizarmos como os dados dessa coluna se agrupam.
 
 
-```python
+```
 s = df['diet']
 counts = s.value_counts()
 percent = s.value_counts(normalize=True)
@@ -173,7 +171,7 @@ Na tabela acima percebemos que alguns dados podem não acrescentar valor à aná
 Como é apenas uma análise exploratória, não há tanto problema em excluir dados desta maneira.
 
 
-```python
+```
 df.drop(df[df['diet'] == "unknown"].index, inplace = True)  #dropando variáveis sem significância
 df.drop(df[df['diet'] == "herbivorous/omnivorous"].index, inplace = True)
 
@@ -201,7 +199,7 @@ plt.plot()
 Podemos perceber que "length" é uma variável quantitativa, porém o fato dela conter uma string(m) acompanhando pode ser um empecilho, dependendo do que se deseja trabalhar em cima desta variável.
 
 
-```python
+```
 df['length'].value_counts()
 ```
 
@@ -224,7 +222,7 @@ df['length'].value_counts()
 
 
 
-```python
+```
 plt.figure(figsize = (12, 6))
 
 print('Comprimento')
@@ -270,7 +268,7 @@ Irei dropar a string "m" de type e depois transformar essa variável para numér
 (talvez isto não fosse necessário para essas análises, mas foi interessante para aprender a usar o método de separação).
 
 
-```python
+```
 df['length'] = df['length'].str.replace('m','')
 df['length'] = pd.to_numeric(df['length'])
 df.head(2)
@@ -300,7 +298,7 @@ Dropei as colunas taxonomy e link, pois não irei explorá-las.
 Verifiquei os valores max e min da variável length, assim podemos localizar a linha a qual estão contidas esses valores e verificá-los individualmente.
 
 
-```python
+```
 df.drop(['taxonomy',"link"], axis='columns', inplace=True)
 
 print(df['length'][df.length== df.length.max()])
@@ -334,7 +332,7 @@ print(df.loc[74].to_markdown())
 #### Já com essa verificação, podemos ver que a subordem Sauropoda é a que apresenta os maiores indivíduos.
 
 
-```python
+```
 print(df.loc[30].to_markdown())
 print("\n")
 print(df.loc[273].to_markdown())
@@ -367,7 +365,7 @@ print(df.loc[273].to_markdown())
 <center><img crossorigin="anonymous" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Longest_dinosaurs2.svg/1280px-Longest_dinosaurs2.svg.png" class="svg mw-mmv-dialog-is-open" width="1186" height="324"><center>
 
 
-```python
+```
 print(np.sort(df['length'].unique())) #verificando a extensão da diversidade de valores
 ```
 
@@ -385,7 +383,7 @@ Resolvi agrupá-los em 5 grupos e depositá-los em uma nova coluna, para facilit
 A presença de muitos grupos normalmente torna difícil a interpretação e perde seu valor didático.
 
 
-```python
+```
 porte = []
 for value in df["length"]:
     if value < 1.0:
@@ -424,7 +422,7 @@ Se temos dados, temos perguntas, e podemos respondê-las procurando relações e
 * Criarei um gráfico de dispersão para analisar a distribuição dos grupos que acabamos de criar em relação à dieta.  
 
 
-```python
+```
 plt.figure(figsize=(15,9))
 
 sns.set_style("ticks")
@@ -472,7 +470,7 @@ Os pontos mais escuros normalmente expressam maior densidade nessa área; em um 
 Podemos tentar analisar qual o padrão de tamanho em relação às Subordens.
 
 
-```python
+```
 plt.figure(figsize=(15,9))
 
 
@@ -521,7 +519,7 @@ plt.legend(bbox_to_anchor=(1, 1), loc=2, borderpad=1, labelspacing=1.2,fontsize=
 #### Um histograma apontando a relação das subordem com a dieta também pode ser interessante visualizar.
 
 
-```python
+```
 plt.figure(figsize=(15,9))
 sns.histplot(binwidth=0.5, x="type", hue="diet", data=df, stat="count", multiple="stack",palette="cubehelix")
 plt.xticks(fontsize = 15)
@@ -539,7 +537,7 @@ sns.set_style("ticks")
 
 
 
-```python
+```
 # simples análise das variáveis. Podemos ver como a análise torna-se diferente quando temos uma variável quantitativa. 
 
 print(df['type'].describe())
@@ -577,7 +575,7 @@ print(df['length'].describe())
 Em relação à subordem, quais estão mais presentes no estudo?
 
 
-```python
+```
 plt.figure(figsize = (12, 6))
 df['type'].value_counts()
 print('Tipos: Subordem')
@@ -612,7 +610,7 @@ plt.plot()
 
 
 
-```python
+```
 #variável com muitas classes, porém a maioria com um exemplar, normal para um banco de espécies.
 
 count = df['species'].value_counts() 
@@ -635,7 +633,7 @@ display(count)
 
 
 
-```python
+```
 # Podemos procurar por alguma espécie de interesse para sabermos algumas informações
 
 df[df['species'].str.contains("rex")==True]
@@ -650,7 +648,7 @@ df[df['species'].str.contains("rex")==True]
 <img src="https://static.wikia.nocookie.net/jpl-live-the-legend/images/a/a8/OthnieliaMissDNAJPL.jpg/revision/latest?cb=20140227082926" alt="Othnielia Rex | JPL Live the Legend Wiki | Fandom" jsaction="load:XAeZkd;" jsname="HiaYvf" class="n3VNCb" data-noaft="1" style="width: 436px; height: 230.858px; margin: 0px;">
 
 
-```python
+```
 df[df['name'].str.contains("tyrannosaurus")==True]
 ```
 
@@ -662,7 +660,7 @@ Analisando a procedência:
 * Será que existiram mais dinossauros em uma região, ou será que aquela região faz mais pesquisas sobre esse nicho?
 
 
-```python
+```
 plt.figure(figsize = (12, 6))
 df['lived_in'].value_counts()
 print('Proporção de dinossauros por país')
@@ -719,7 +717,7 @@ plt.plot()
 Análise dos períodos da "Era dos Dinossauros".
 
 
-```python
+```
 plt.figure(figsize = (12, 6))
 df['period'].value_counts()
 print('Proporção de dinossauros por período')
@@ -757,7 +755,7 @@ Temos muitos períodos similares que divergem em relação a "alguns" milhões d
 Talvez possamos agrupar alguns espaços de tempo para facilitar a análise.
 
 
-```python
+```
 df.head(2) #A informação de anos junto dos períodos acaba criando muitos grupos diferentes
 ```
 
@@ -769,7 +767,7 @@ Clusterizando os períodos em Early, Mid e Late, sem a exatidão dos anos.
 Chamei o método str.split para pegar o que havia antes do 2º espaço e colocar em uma nova coluna.
 
 
-```python
+```
 df["periodo_grupos"] = df["period"].str.split(" ").str[:2].str.join(" ")
 df.head(2)
 ```
@@ -778,7 +776,7 @@ df.head(2)
 
 
 
-```python
+```
 # Printando contagem (%) e plotando
 
 plt.figure(figsize = (12, 6))
@@ -817,7 +815,7 @@ plt.plot()
 Irei dropar a linha com USA. Poderia ter utilizado uma alternativa melhor para tratamento, e assim não perder aquele dado por causa de um erro, mas foi a medida mais rápida para a plotagem.
 
 
-```python
+```
 df.drop(df[df['periodo_grupos'] == "USA"].index, inplace = True)
 ```
 
@@ -826,7 +824,7 @@ df.drop(df[df['periodo_grupos'] == "USA"].index, inplace = True)
 * É possível pensar que essa maior quantidade também seja em razão de melhores condições de preservação dos fósseis e outros determinantes.
 
 
-```python
+```
 count = df["periodo_grupos"].value_counts().values
 anos = df["periodo_grupos"].value_counts().index
 
@@ -874,7 +872,7 @@ plt.legend(prop={'size': 13})
 * Farei a mesma limpeza de string separando o nome da data.
 
 
-```python
+```
 df['autor'] = [x.split('(')[0] for x in df['named_by']] #Salvei apenas o que tinha antes do () em uma nova variável
                                                         # porém isso salvou os nomes com um espaço depois da última letra
 
@@ -911,7 +909,7 @@ df.info()
     
 
 
-```python
+```
 df.head(2)
 ```
 
@@ -921,7 +919,7 @@ df.head(2)
 Quais autores fizeram mais descobertas?
 
 
-```python
+```
 count = df['autor'].value_counts().head(10)
 display(count)
 
@@ -954,7 +952,7 @@ plt.plot()
 
 
 
-```python
+```
 count.dtype
 ```
 
@@ -968,7 +966,7 @@ count.dtype
 Podemos verificar os anos de maiores descobertas.
 
 
-```python
+```
 plt.figure(figsize=(12,9))
 sns.countplot(data=df, y='ano', order=df['ano'].value_counts().head(10).index, palette="cubehelix")
 sns.despine(offset=10, trim=True)
@@ -989,7 +987,7 @@ esse conjunto pode ser menor que conjuntos de datas que não apresentaram tantos
 Pelo que entendi, essas barras são baseadas em média, medida essa que é influenciada por outliers.
 
 
-```python
+```
 plt.figure(figsize=(14,9))
 sns.despine(offset=10, trim=True)
 sns.set_style("ticks")
@@ -1006,7 +1004,7 @@ plt.plot()
 
 
 
-```python
+```
 plt.figure(figsize=(14,9))
 sns.despine(offset=10, trim=True)
 sns.set_style("ticks")
@@ -1024,7 +1022,7 @@ Podemos criar um dicionário unindo duas colunas, ele apresentará uma "chave" e
 Isto é interessante para isolar áreas de interesse e, dependendo da análise, pode facilitar a implementação da metodologia aplicada.
 
 
-```python
+```
 area_dict = dict(zip(df.autor, df.ano))
 area_dict
 ```
@@ -1240,7 +1238,7 @@ area_dict
 
 
 
-```python
+```
 print(area_dict.get("Marsh ")) #trará seu valor
 ```
 
@@ -1250,7 +1248,7 @@ print(area_dict.get("Marsh ")) #trará seu valor
 Outra possibilidade é transformar nossos dados em conjuntos "arrays". Normalmente se faz isso na hora de organizar nossos dados para implementar algum modelo preditivo.  
 
 
-```python
+```
 arr = df["ano"].to_numpy()
 arr = arr[~pd.isnull(arr)] #removendo nans
 print(arr)
