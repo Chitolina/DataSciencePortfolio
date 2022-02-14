@@ -24,7 +24,7 @@ type: "featured"
 <h1 align=center><a target="_blank" href="https://demo.gethugothemes.com/liva" rel="nofollow">Análise exploratória (EDA) e Manipulação de dados: Dino dataset</a> <a  target="_blank" href="https://lighthouse-dot-webdotdevsite.appspot.com//lh/html?url=https%3A%2F%2Fdemo.gethugothemes.com%2Fliva%2F">🦕</a></h1>
 
 ###### **Análise exploratória (EDA) e Manipulação de dados com o intuito de gerar insights a respeito de um pequeno dataset sobre dinossauros (maioria de variáveis categóricas).**
-###### O dataset foi obtido a partir de um processo de webscraping do site do Museu de História Nacional (https://www.nhm.ac.uk/discover/dino-directory.html), realizado por outro usuário (https://github.com/kjanjua26/jurassic-park), ao qual eu descobri aleatoriamente. Assim, curioso e obcecado por dinossauros, resolvi unir o útil ao agradável e aprimorar meu conhecimento em EDA com um assunto que me agrada. Como é um dataset pequeno e majoritariamente constituído de variáveis qualitativas, trabalhei apenas na geração de insights, sem aplicar nenhum modelo preditivo.
+###### O dataset foi obtido a partir de um processo de webscraping do site do Museu de História Nacional https://www.nhm.ac.uk/discover/dino-directory.html , realizado por outro usuário https://github.com/kjanjua26/jurassic-park, ao qual eu descobri aleatoriamente. Assim, curioso e obcecado por dinossauros, resolvi unir o útil ao agradável e aprimorar meu conhecimento em EDA com um assunto que me agrada. Como é um dataset pequeno e majoritariamente constituído de variáveis qualitativas, trabalhei apenas na geração de insights, sem aplicar nenhum modelo preditivo.
 
 ###### O pequeno projeto aprimorou minhas skills na manipulação de dados e ampliou minha capacidade de gerar análises visualmente interessantes. O interessante da análise com Python é que, diferente de outras ferramentas, como Excel/Bi/Tableau, você tem uma maior versatilidade na hora de manipular/separar/excluir dados, além do potencial de análises preditivas, o que faz com que o conhecimento da linguagem torne-se muito positivo para quem gosta de trabalhar analisando dados.
 
@@ -48,6 +48,8 @@ warnings.filterwarnings('ignore')
 df = pd.read_csv("data.csv")
 df.head(5)
 ```
+~ Talvez seja interessante dar um CRTL+ para dar zoom em algumas imagems ~~*
+
 ![image](../../images/dino/1.jpg)
 
 Verificamos algumas informações sobre a tabela.
@@ -329,7 +331,7 @@ print(df.loc[74].to_markdown())
 
 <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Confuciusornis_sanctus_fossil.jpg" alt="Ficheiro:Confuciusornis sanctus fossil.jpg – Wikipédia, a enciclopédia livre" jsaction="load:XAeZkd;" jsname="HiaYvf" class="n3VNCb" data-noaft="1" style="width: 386px; height: 416.006px; margin: 0px;">
 
-#### Já com essa verificação, podemos ver que a subordem Sauropoda é a que apresenta os maiores indivíduos.
+Já com essa verificação, podemos ver que a subordem Sauropoda é a que apresenta os maiores indivíduos.
 
 
 ```
